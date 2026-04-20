@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+tmp/
+.nx/cache/
+.idea/
+.vscode/
+.DS_Store
+
+.env
+.env.*
+!.env.example
+
+.angular
+
+__screenshots__/

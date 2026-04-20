@@ -1,0 +1,573 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.5.3",
+  "pathMappings": {
+    "@frost-logix/shared-types": [
+      "libs/shared-types/src/index.ts"
+    ],
+    "shared-types": [
+      "libs/shared-types/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "name": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".nvmrc",
+        "hash": "14743000810602433389"
+      },
+      {
+        "file": "apps/CLAUDE.md",
+        "hash": "1264877165245675126"
+      },
+      {
+        "file": "nx.json",
+        "hash": "11370589697444339372"
+      },
+      {
+        "file": "prisma/schema.prisma",
+        "hash": "14933585594222433441"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "5290103103582356797"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "13380216240547394315"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "12926286793420397906"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "5407418692668764289"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "6870352021923392442"
+      },
+      {
+        "file": "docker/postgres/init.sql",
+        "hash": "4626850509063803396"
+      },
+      {
+        "file": "package.json",
+        "hash": "8312071427094249894"
+      },
+      {
+        "file": "docker/nginx/default.conf",
+        "hash": "9549594697284491282"
+      },
+      {
+        "file": "README.md",
+        "hash": "11709546955029227029"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "6844583746126349669"
+      },
+      {
+        "file": "components.json",
+        "hash": "17198146430810427948"
+      },
+      {
+        "file": "docker/api/Dockerfile",
+        "hash": "17418777364441617589"
+      },
+      {
+        "file": "docker-compose.yml",
+        "hash": "6794983067432258256"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "6166013545232715491"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": ".postcssrc.json",
+        "hash": "3238241118719959164"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "3439883644851597228"
+      },
+      {
+        "file": "docker/web/Dockerfile",
+        "hash": "10188697591365292540"
+      },
+      {
+        "file": "prisma/migrations/migration_lock.toml",
+        "hash": "872437952673290735"
+      },
+      {
+        "file": "docker/nginx/Dockerfile",
+        "hash": "3396369100371347122"
+      },
+      {
+        "file": "prisma/migrations/20260315152735_init/migration.sql",
+        "hash": "13336675303510021883"
+      },
+      {
+        "file": ".env.example",
+        "hash": "9935177440891304360"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "10257335572200473999"
+      }
+    ],
+    "projectFileMap": {
+      "web-e2e": [
+        {
+          "file": "apps/web-e2e/eslint.config.mjs",
+          "hash": "1172734138943286526",
+          "deps": [
+            "npm:eslint-plugin-playwright"
+          ]
+        },
+        {
+          "file": "apps/web-e2e/playwright.config.ts",
+          "hash": "13394502109338907797",
+          "deps": [
+            "npm:@playwright/test",
+            "npm:@nx/playwright",
+            "npm:@nx/devkit"
+          ]
+        },
+        {
+          "file": "apps/web-e2e/project.json",
+          "hash": "11356601415588047577"
+        },
+        {
+          "file": "apps/web-e2e/src/example.spec.ts",
+          "hash": "16019101014373124625",
+          "deps": [
+            "npm:@playwright/test"
+          ]
+        },
+        {
+          "file": "apps/web-e2e/tsconfig.json",
+          "hash": "15726545290547512047"
+        }
+      ],
+      "shared-types": [
+        {
+          "file": "libs/shared-types/README.md",
+          "hash": "9741169815637935730"
+        },
+        {
+          "file": "libs/shared-types/eslint.config.mjs",
+          "hash": "4313095032450400554",
+          "deps": [
+            [
+              "npm:jsonc-eslint-parser",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "libs/shared-types/jest.config.cts",
+          "hash": "3250334522978628838"
+        },
+        {
+          "file": "libs/shared-types/package.json",
+          "hash": "6126468468186197096",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/shared-types/project.json",
+          "hash": "10003808341076669952"
+        },
+        {
+          "file": "libs/shared-types/src/index.ts",
+          "hash": "17477233218007285873"
+        },
+        {
+          "file": "libs/shared-types/src/lib/shared-types.spec.ts",
+          "hash": "8827448832389543054"
+        },
+        {
+          "file": "libs/shared-types/src/lib/shared-types.ts",
+          "hash": "16911645835170606152"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.json",
+          "hash": "12975668481162286788"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.lib.json",
+          "hash": "3552285890691744475"
+        },
+        {
+          "file": "libs/shared-types/tsconfig.spec.json",
+          "hash": "11011431583980985399"
+        }
+      ],
+      "api-e2e": [
+        {
+          "file": "apps/api-e2e/jest.config.cts",
+          "hash": "16237957319090451515"
+        },
+        {
+          "file": "apps/api-e2e/project.json",
+          "hash": "9133279122052301863"
+        },
+        {
+          "file": "apps/api-e2e/src/api/api.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "apps/api-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "apps/api-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/api-e2e/tsconfig.spec.json",
+          "hash": "8569745683369669082"
+        }
+      ],
+      "web": [
+        {
+          "file": "apps/web/eslint.config.mjs",
+          "hash": "16756400681144203361",
+          "deps": [
+            "npm:@nx/eslint-plugin"
+          ]
+        },
+        {
+          "file": "apps/web/project.json",
+          "hash": "4646652415854148530"
+        },
+        {
+          "file": "apps/web/proxy.conf.json",
+          "hash": "2460287023887876395"
+        },
+        {
+          "file": "apps/web/proxy.docker.json",
+          "hash": "17995465794687215161"
+        },
+        {
+          "file": "apps/web/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/web/src/app/app.config.ts",
+          "hash": "10041368984895830147",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/app.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/web/src/app/app.html",
+          "hash": "10136998685627858143"
+        },
+        {
+          "file": "apps/web/src/app/app.routes.ts",
+          "hash": "3332318116109535360",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/app.spec.ts",
+          "hash": "7224629084266502930",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/app.ts",
+          "hash": "6761280868994873348",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/forms",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/login/auth.service.ts",
+          "hash": "985679187305897116",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/login/login.component.ts",
+          "hash": "13505384742070665292",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/forms",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/nx-welcome.ts",
+          "hash": "14635432836486466767",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "apps/web/src/app/users.service.ts",
+          "hash": "6524941135057698913",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:rxjs",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/web/src/environments/environment.prod.ts",
+          "hash": "8350818736705858739"
+        },
+        {
+          "file": "apps/web/src/environments/environment.ts",
+          "hash": "1215418429710722253"
+        },
+        {
+          "file": "apps/web/src/index.html",
+          "hash": "4619477563060451315"
+        },
+        {
+          "file": "apps/web/src/main.ts",
+          "hash": "3314327030169821486",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "apps/web/src/styles.css",
+          "hash": "14036542834867826700"
+        },
+        {
+          "file": "apps/web/tsconfig.app.json",
+          "hash": "18236407445202082987"
+        },
+        {
+          "file": "apps/web/tsconfig.json",
+          "hash": "16004134237605501702"
+        },
+        {
+          "file": "apps/web/tsconfig.spec.json",
+          "hash": "13919890687900665478"
+        }
+      ],
+      "api": [
+        {
+          "file": "apps/api/jest.config.ts",
+          "hash": "13301794722809387290"
+        },
+        {
+          "file": "apps/api/project.json",
+          "hash": "8475134489010349135"
+        },
+        {
+          "file": "apps/api/src/app/app.module.ts",
+          "hash": "3456709700444203736",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/auth/auth.controller.ts",
+          "hash": "9448491771645345166",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/auth/auth.module.ts",
+          "hash": "1381807941916020404",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/auth/auth.service.ts",
+          "hash": "10865126524358360476",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:bcryptjs"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/auth/dto/login.dto.ts",
+          "hash": "9227999051697837030",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/database/database.module.ts",
+          "hash": "13184015348576210022",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/database/prisma.service.ts",
+          "hash": "16901280149736789804",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@prisma/client"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/health.controller.ts",
+          "hash": "3247158057772676107",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/users/dto/create-user.dto.ts",
+          "hash": "18418384083432329148",
+          "deps": [
+            "npm:class-validator",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/users/dto/user.dto.ts",
+          "hash": "5877737943859085741",
+          "deps": [
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/users/users.controller.ts",
+          "hash": "12030105594112293163",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/users/users.module.ts",
+          "hash": "18373863204991603520",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/users/users.service.ts",
+          "hash": "5808612160039151749",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:bcryptjs",
+            "shared-types"
+          ]
+        },
+        {
+          "file": "apps/api/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/api/src/main.ts",
+          "hash": "6235108940088077136",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/tsconfig.app.json",
+          "hash": "12253770713580224683"
+        },
+        {
+          "file": "apps/api/tsconfig.json",
+          "hash": "3025378044812449119"
+        },
+        {
+          "file": "apps/api/tsconfig.spec.json",
+          "hash": "2366056516927932995"
+        },
+        {
+          "file": "apps/api/webpack.config.js",
+          "hash": "5823274778110364646",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ]
+    }
+  },
+  "externalNodesHash": "15900459683739611601"
+}

@@ -1,18 +1,16 @@
-import { Component, computed, effect, signal, inject, afterNextRender } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import { UsersService } from './users.service';
+import { afterNextRender, Component, computed, effect, inject, signal } from '@angular/core';
+import { UsersService } from '../../users.service';
 import { CreateUserDto, UserDto } from '@frost-logix/shared-types';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLink, RouterLinkActive],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  selector: 'app-user-edit',
+  imports: [CommonModule, FormsModule],
+  templateUrl: './edit-user.component.html',
+  styleUrl: './edit-user.component.css',
 })
-export class App {
+export class EditUserComponent {
   readonly title = 'Frost Logix Web';
 
   private readonly usersService = inject(UsersService);

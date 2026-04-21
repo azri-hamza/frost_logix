@@ -1,9 +1,17 @@
 import { Routes } from '@angular/router';
 import { App } from './app';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { EditUserComponent } from './users/edit/edit-user.component';
 
 export const routes: Routes = [
-  { path: '', component: App },
-  { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '' },
+  {
+    path: '',
+    component: App,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'users', component: EditUserComponent },
+    ],
+  },
 ];

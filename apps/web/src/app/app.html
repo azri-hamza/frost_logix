@@ -1,4 +1,36 @@
+<nav class="border-b border-border bg-background">
+  <div class="container mx-auto px-4">
+    <div class="flex h-16 items-center justify-between">
+      <a routerLink="/" class="text-xl font-bold text-foreground">Frost Logix</a>
 
+      <div class="flex items-center gap-6">
+        <a
+          routerLink="/"
+          routerLinkActive="text-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Home
+        </a>
+        <a
+          routerLink="/users"
+          routerLinkActive="text-primary"
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Users
+        </a>
+        <a
+          routerLink="/login"
+          routerLinkActive="text-primary"
+          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Login
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 
-
-<router-outlet></router-outlet>
+<main class="container mx-auto px-4 py-8">
+  <router-outlet></router-outlet>
+</main>

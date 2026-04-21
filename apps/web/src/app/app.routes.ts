@@ -5,13 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { EditUserComponent } from './users/edit/edit-user.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: App,
-    children: [
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'users', component: EditUserComponent },
-    ],
-  },
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'users', component: EditUserComponent },
 ];

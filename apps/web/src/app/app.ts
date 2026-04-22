@@ -1,9 +1,10 @@
 import { Component, computed, effect, signal, inject, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UsersService } from './users.service';
+import { AuthService } from './login/auth.service';
 import { CreateUserDto, UserDto } from '@frost-logix/shared-types';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class App {
   readonly title = 'Frost Logix Web';
 
+  readonly authService = inject(AuthService);
   private readonly usersService = inject(UsersService);
+  private readonly router = inject(Router);
 
   readonly users = signal<UserDto[]>([]);
   readonly loading = signal(false);
@@ -93,5 +96,10 @@ export class App {
         this.loading.set(false);
       },
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -11,4 +11,10 @@ export class AuthController {
   async login(@Body() data: LoginDto) {
     return this.authService.login(data);
   }
+
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  async logout() {
+    return { message: 'Logged out successfully' };
+  }
 }

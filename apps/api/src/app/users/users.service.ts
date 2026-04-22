@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../database/prisma.service';
 import { CreateUserDto as SharedCreateUserDto, UserDto } from '@frost-logix/shared-types';
@@ -22,6 +22,9 @@ export class UsersService {
   }
 
   async create(data: SharedCreateUserDto & { password?: string }): Promise<UserDto> {
+    if (!data.password) {
+      throw new BadRequestException('Password is required');
+    }
     const hashedPassword = data.password ? await bcrypt.hash(data.password, 10) : '';
 
     const user = await this.prisma.user.create({

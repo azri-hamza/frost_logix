@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { CreateUserDto as SharedCreateUserDto } from '@frost-logix/shared-types';
 
 export class CreateUserDto implements SharedCreateUserDto {
@@ -12,5 +12,9 @@ export class CreateUserDto implements SharedCreateUserDto {
   @IsString()
   @IsNotEmpty()
   last_name!: string;
+
+  @IsString()
+  @IsOptional()
+  password?: string;
 }
 

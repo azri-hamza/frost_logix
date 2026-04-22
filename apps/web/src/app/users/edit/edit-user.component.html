@@ -40,6 +40,27 @@
           class="w-full h-9 px-3 text-sm border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
+      <div class="mb-5">
+        <label for="password" class="block text-sm text-muted-foreground mb-1">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          [(ngModel)]="newUser.password"
+          class="w-full h-9 px-3 text-sm border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        />
+      </div>
+      <div class="mb-5">
+        <label for="confirmPassword" class="block text-sm text-muted-foreground mb-1">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          required
+          class="w-full h-9 px-3 text-sm border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        />
+      </div>
 
       <button
         type="submit"

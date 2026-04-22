@@ -24,6 +24,7 @@ export class EditUserComponent {
     email: '',
     first_name: '',
     last_name: '',
+    password: '',
   };
 
   constructor() {

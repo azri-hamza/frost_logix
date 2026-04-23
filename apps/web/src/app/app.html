@@ -12,14 +12,56 @@
         >
           Home
         </a>
-        <a
-          routerLink="/users"
-          routerLinkActive="text-primary"
-          class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Users
-        </a>
         @if (authService.isAuthenticated()) {
+          <a
+            routerLink="/products"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Products
+          </a>
+          <a
+            routerLink="/customers"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Customers
+          </a>
+          <a
+            routerLink="/suppliers"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Suppliers
+          </a>
+          <a
+            routerLink="/purchase"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Purchase
+          </a>
+          <a
+            routerLink="/sales"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Sales
+          </a>
+          <a
+            routerLink="/inventory"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Inventory
+          </a>
+          <a
+            routerLink="/reports"
+            routerLinkActive="text-primary"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Reports
+          </a>
           <button
             (click)="logout()"
             class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"

@@ -365,24 +365,45 @@ import { HlmNativeSelectImports } from '@spartan-ng/helm/native-select';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 ```
 
-### 2.3 Dialog Context Pattern (Critical)
-Always capture and use dialog context for proper control:
+### 2.3 Dialog Context Pattern (Corrected)
 
+**Alert Dialog** (Use `hlmAlertDialogCancel` and `hlmAlertDialogAction` for auto-dismiss):
 ```typescript
-// Dialog content needs *hlmAlertDialogPortal or *hlmDialogPortal
-<hlm-alert-dialog-content *hlmAlertDialogPortal="let ctx">
-  <!-- Portal directive makes ctx available -->
-  <hlm-alert-dialog-header>
-    <h2 hlmAlertDialogTitle>Confirm Action</h2>
-    <p hlmAlertDialogDescription>Are you sure?</p>
-  </hlm-alert-dialog-header>
-  <hlm-alert-dialog-footer>
-    <!-- Use ctx.close() to dismiss dialog -->
-    <button (click)="ctx.close()">Cancel</button>
-    <button (click)="action(); ctx.close()">Confirm</button>
-  </hlm-alert-dialog-footer>
-</hlm-alert-dialog-content>
+<hlm-alert-dialog>
+  <button hlmAlertDialogTrigger hlmBtn variant="destructive">Delete</button>
+  <hlm-alert-dialog-content *hlmAlertDialogPortal>
+    <hlm-alert-dialog-header>
+      <h2 hlmAlertDialogTitle>Confirm</h2>
+      <p hlmAlertDialogDescription>Sure?</p>
+    </hlm-alert-dialog-header>
+    <hlm-alert-dialog-footer>
+      <button hlmAlertDialogCancel hlmBtn variant="outline">Cancel</button>
+      <button hlmAlertDialogAction hlmBtn variant="destructive" (click)="onDelete()">
+        Delete
+      </button>
+    </hlm-alert-dialog-footer>
+  </hlm-alert-dialog-content>
+</hlm-alert-dialog>
 ```
+
+**Dialog** (Use `hlmDialogClose` for dismissal):
+```typescript
+<hlm-dialog>
+  <button hlmDialogTrigger hlmBtn>Open</button>
+  <hlm-dialog-content *hlmDialogPortal>
+    <!-- Form content -->
+    <hlm-dialog-footer>
+      <button hlmBtn hlmDialogClose>Close</button>
+      <button hlmBtn (click)="save()">Save</button>
+    </hlm-dialog-footer>
+  </hlm-dialog-content>
+</hlm-dialog>
+```
+
+**Key Differences:**
+- Alert Dialog: Use `hlmAlertDialogCancel` / `hlmAlertDialogAction` directives
+- Dialog: Use `hlmDialogClose` attribute for dismiss buttons
+- No manual `let ctx` binding needed—directives handle sta
 
 ### 2.4 Styling Rules
 - **Do NOT mix:** Spartan component directives + inline Tailwind on same element

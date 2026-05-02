@@ -1,3 +1,8 @@
+# AGENTS.md — AI Assistant Development Standards
+
+Development standards and coding patterns for AI assistants (Claude Code, OpenCode, etc.) 
+working on the Frost Logix project
+
 # Frost Logix — Project Context & Development Standards
 
 ## Monorepo Structure

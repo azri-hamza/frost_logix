@@ -127,9 +127,10 @@ model PurchaseInvoiceItem {
   id               String           @id @default(uuid(7)) @db.Uuid
   purchase_invoice_id String       @db.Uuid
   product_id       String          @db.Uuid
-  quantity         Decimal          @db.Decimal(12, 3)
-  unit_price       Decimal         @db.Decimal(10, 3)
-  total            Decimal          @db.Decimal(12, 3)
+  product_name    String
+  quantity        Decimal          @db.Decimal(12, 3)
+  unit_price      Decimal         @db.Decimal(10, 3)
+  total           Decimal          @db.Decimal(12, 3)
 
   purchase_invoice PurchaseInvoice @relation(fields: [purchase_invoice_id], references: [id])
   product          Product          @relation(fields: [product_id], references: [id])
@@ -152,6 +153,7 @@ model GRNItem {
   id         String   @id @default(uuid(7)) @db.Uuid
   grn_id     String  @db.Uuid
   product_id String  @db.Uuid
+  product_name String
   quantity   Decimal @db.Decimal(12, 3)
   unit_price Decimal @db.Decimal(10, 3)
   total      Decimal @db.Decimal(12, 3)
@@ -175,12 +177,13 @@ model DeliveryNote {
 }
 
 model DeliveryNoteItem {
-  id         String   @id @default(uuid(7)) @db.Uuid
-  dn_id      String  @db.Uuid
-  product_id String  @db.Uuid
-  quantity   Decimal @db.Decimal(12, 3)
-  unit_price Decimal @db.Decimal(10, 3)
-  total      Decimal @db.Decimal(12, 3)
+  id           String   @id @default(uuid(7)) @db.Uuid
+  dn_id        String  @db.Uuid
+  product_id   String  @db.Uuid
+  product_name String
+  quantity    Decimal @db.Decimal(12, 3)
+  unit_price  Decimal @db.Decimal(10, 3)
+  total       Decimal @db.Decimal(12, 3)
 
   dn      DeliveryNote @relation(fields: [dn_id], references: [id])
   product Product     @relation(fields: [product_id], references: [id])
@@ -208,10 +211,11 @@ model SalesInvoice {
 model SalesInvoiceItem {
   id               String       @id @default(uuid(7)) @db.Uuid
   sales_invoice_id String       @db.Uuid
-  product_id       String       @db.Uuid
-  quantity         Decimal       @db.Decimal(12, 3)
-  unit_price       Decimal      @db.Decimal(10, 3)
-  total            Decimal      @db.Decimal(12, 3)
+  product_id      String       @db.Uuid
+  product_name   String
+  quantity       Decimal       @db.Decimal(12, 3)
+  unit_price     Decimal      @db.Decimal(10, 3)
+  total         Decimal      @db.Decimal(12, 3)
 
   sales_invoice SalesInvoice @relation(fields: [sales_invoice_id], references: [id])
   product      Product      @relation(fields: [product_id], references: [id])

@@ -1,0 +1,10 @@
+{
+  "name": "@spartan-ng/cli": "0.0.1-alpha.678",
+  "implementation": "local",
+  "generators": {
+    "@spartan-ng/cli:ui": {
+      "skipModule": false,
+      "path": "apps/web/src/app/lib"
+    }
+  }
+}

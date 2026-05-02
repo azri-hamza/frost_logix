@@ -1,22 +1,20 @@
 import { Component, signal, inject, afterNextRender } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/shared-types';
+import { HlmButtonImports } from '@frost-logix/ui/button';
+import { HlmAlertDialogImports } from '@frost-logix/ui/alert-dialog';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, HlmButtonImports, HlmAlertDialogImports],
   template: `
     <div class="space-y-4">
       <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold">المنتجات</h1>
-        <button
-          (click)="showForm.set(!showForm())"
-          class="rounded bg-primary px-4 py-2 text-primary-foreground"
-        >
+        <button hlmBtn (click)="toggleForm()">
           {{ showForm() ? 'إلغاء' : 'إضافة منتج' }}
         </button>
       </div>
@@ -29,6 +27,7 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
               <label class="mb-1 block text-sm font-medium">الاسم</label>
               <input
                 [(ngModel)]="newProduct.name"
+                (ngModelChange)="onNewProductNameChange($event)"
                 class="w-full rounded border border-border bg-background px-3 py-2"
                 placeholder="اسم المنتج"
               />
@@ -53,10 +52,7 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
               </select>
             </div>
           </div>
-          <button
-            (click)="createProduct()"
-            class="mt-4 rounded bg-primary px-4 py-2 text-primary-foreground"
-          >
+          <button hlmBtn (click)="createProduct()">
             حفظ
           </button>
         </div>
@@ -70,6 +66,7 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
               <label class="mb-1 block text-sm font-medium">الاسم</label>
               <input
                 [(ngModel)]="editForm.name"
+                (ngModelChange)="onEditFormNameChange($event)"
                 class="w-full rounded border border-border bg-background px-3 py-2"
                 placeholder="اسم المنتج"
               />
@@ -105,16 +102,10 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
             </label>
           </div>
           <div class="mt-4 flex gap-2">
-            <button
-              (click)="updateProduct()"
-              class="rounded bg-primary px-4 py-2 text-primary-foreground"
-            >
+            <button hlmBtn (click)="updateProduct()">
               حفظ التغييرات
             </button>
-            <button
-              (click)="cancelEdit()"
-              class="rounded border border-border bg-background px-4 py-2"
-            >
+            <button hlmBtn variant="outline" (click)="cancelEdit()">
               إلغاء
             </button>
           </div>
@@ -148,10 +139,50 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
                 <td class="px-4 py-2">
                   <button
                     (click)="startEdit(product)"
-                    class="rounded bg-muted px-3 py-1 text-sm hover:bg-muted/80"
+                    hlmBtn
+                    variant="outline"
+                    size="sm"
                   >
                     تعديل
                   </button>
+
+                   <hlm-alert-dialog>
+                     <button
+                       hlmAlertDialogTrigger
+                       hlmBtn
+                       variant="destructive"
+                       size="sm"
+                       class="ml-2"
+                     >
+                       حذف
+                     </button>
+                     <hlm-alert-dialog-content *hlmAlertDialogPortal="let ctx" (keydown.escape)="ctx.close()">
+                       <hlm-alert-dialog-header>
+                         <h2 hlmAlertDialogTitle>حذف المنتج</h2>
+                         <p hlmAlertDialogDescription>
+                           هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.
+                         </p>
+                       </hlm-alert-dialog-header>
+                       <hlm-alert-dialog-footer>
+                         <button
+                           hlmAlertDialogCancel
+                           hlmBtn
+                           variant="outline"
+                           (click)="ctx.close()"
+                         >
+                           إلغاء
+                         </button>
+                         <button
+                           hlmAlertDialogAction
+                           hlmBtn
+                           variant="destructive"
+                           (click)="confirmDelete(product.id); ctx.close()"
+                         >
+                           حذف
+                         </button>
+                       </hlm-alert-dialog-footer>
+                     </hlm-alert-dialog-content>
+                   </hlm-alert-dialog>
                 </td>
               </tr>
             }
@@ -164,9 +195,10 @@ import { ProductDto, CreateProductDto, UpdateProductDto } from '@frost-logix/sha
 export class ProductsPage {
   private readonly productsService = inject(ProductsService);
 
-  products = signal<ProductDto[]>([]);
-  showForm = signal(false);
-  editingProduct = signal<ProductDto | null>(null);
+  readonly products = signal<ProductDto[]>([]);
+  readonly showForm = signal(false);
+  readonly editingProduct = signal<ProductDto | null>(null);
+
   newProduct: CreateProductDto = { name: '', name_ar: '', unit: 'kg' };
   editForm: UpdateProductDto = { name: '', name_ar: '', unit: 'kg', is_active: true };
 
@@ -176,28 +208,47 @@ export class ProductsPage {
     });
   }
 
+  toggleForm(): void {
+    this.showForm.update((current) => !current);
+  }
+
   loadProducts(): void {
     this.productsService.getProducts().subscribe({
       next: (products) => this.products.set(products),
+      error: (error) => console.error('Failed to load products:', error),
     });
   }
 
+  onNewProductNameChange(value: string): void {
+    this.newProduct.name = value.trim();
+  }
+
+  onEditFormNameChange(value: string): void {
+    this.editForm.name = value.trim();
+  }
+
   createProduct(): void {
-    if (!this.newProduct.name) return;
+    const name = this.newProduct.name?.trim();
+    if (!name) {
+      console.error('Product name is required');
+      return;
+    }
+
     this.productsService.createProduct(this.newProduct).subscribe({
       next: (product) => {
         this.products.update((current) => [...current, product]);
-        this.newProduct = { name: '', name_ar: '', unit: 'kg' };
+        this.resetForm();
         this.showForm.set(false);
       },
+      error: (error) => console.error('Failed to create product:', error),
     });
   }
 
   startEdit(product: ProductDto): void {
     this.editingProduct.set(product);
     this.editForm = {
-      name: product.name,
-      name_ar: product.name_ar || '',
+      name: product.name.trim(),
+      name_ar: product.name_ar?.trim() || '',
       unit: product.unit,
       is_active: product.is_active,
     };
@@ -207,9 +258,15 @@ export class ProductsPage {
     const product = this.editingProduct();
     if (!product) return;
 
+    const name = this.editForm.name?.trim();
+    if (!name) {
+      console.error('Product name is required');
+      return;
+    }
+
     const data: UpdateProductDto = {
-      name: this.editForm.name || undefined,
-      name_ar: this.editForm.name_ar || undefined,
+      name,
+      name_ar: this.editForm.name_ar?.trim() || undefined,
       unit: this.editForm.unit || undefined,
       is_active: this.editForm.is_active,
     };
@@ -219,12 +276,31 @@ export class ProductsPage {
         this.products.update((current) =>
           current.map((p) => (p.id === updated.id ? updated : p))
         );
-        this.editingProduct.set(null);
+        this.cancelEdit();
       },
+      error: (error) => console.error('Failed to update product:', error),
     });
   }
 
   cancelEdit(): void {
     this.editingProduct.set(null);
+  }
+
+  confirmDelete(productId: string): void {
+    this.productsService.deleteProduct(productId).subscribe({
+      next: () => {
+        this.products.update((current) =>
+          current.filter((p) => p.id !== productId)
+        );
+        if (this.editingProduct()?.id === productId) {
+          this.cancelEdit();
+        }
+      },
+      error: (error) => console.error('Failed to delete product:', error),
+    });
+  }
+
+  private resetForm(): void {
+    this.newProduct = { name: '', name_ar: '', unit: 'kg' };
   }
 }

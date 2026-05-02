@@ -6,6 +6,9 @@ export class PurchaseInvoiceItemDto {
   @IsString()
   product_id: string;
 
+  @IsString()
+  product_name: string;
+
   @IsNumber()
   quantity: number;
 

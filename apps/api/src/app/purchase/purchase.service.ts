@@ -57,6 +57,7 @@ export class PurchaseService {
   async createInvoice(data: CreatePurchaseInvoiceDto): Promise<PurchaseInvoiceDto> {
     const items = data.items.map((item) => ({
       product_id: item.product_id,
+      product_name: item.product_name,
       quantity: item.quantity,
       unit_price: item.unit_price,
       total: item.quantity * item.unit_price,
@@ -112,6 +113,7 @@ export class PurchaseService {
   async createGRN(data: CreateGRNDto): Promise<GRNDto> {
     const items = data.items.map((item) => ({
       product_id: item.product_id,
+      product_name: item.product_name,
       quantity: item.quantity,
       unit_price: item.unit_price,
       total: item.quantity * item.unit_price,
@@ -158,7 +160,7 @@ export class PurchaseService {
       items: invoice.items.map((item: any) => ({
         id: item.id,
         product_id: item.product_id,
-        product_name: item.product.name,
+        product_name: item.product_name,
         quantity: Number(item.quantity),
         unit_price: Number(item.unit_price),
         total: Number(item.total),
@@ -179,7 +181,7 @@ export class PurchaseService {
       items: grn.items.map((item: any) => ({
         id: item.id,
         product_id: item.product_id,
-        product_name: item.product.name,
+        product_name: item.product_name,
         quantity: Number(item.quantity),
         unit_price: Number(item.unit_price),
         total: Number(item.total),

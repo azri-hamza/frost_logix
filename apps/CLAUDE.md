@@ -40,11 +40,14 @@
 
 ## UI Library
 
-- **Component library:** Spartan UI (`@spartan-ng/brain`) — Angular port of shadcn/ui
+- **Component library:** Spartan UI — Angular port of shadcn/ui
+- **Two-layer architecture:**
+  - `@spartan-ng/brain` (npm): Accessible primitives (install via package manager)
+  - `@spartan-ng/helm` (copy-paste): Styled components (copy to `libs/ui/`)
+- **Local UI lib:** Components in `libs/ui/` wrap brain primitives with helm styling
 - **Styling:** Tailwind CSS v4 utility classes + CSS variables in `apps/web/src/styles.css`
 - **Theme:** Neutral theme using OKLCH color format
-- **Components location:** `libs/ui/`
-- **Import alias:** `@frost-logix/ui`
+- **Import alias:** `@frost-logix/ui` (for local UI lib components)
 
 ## Docker Setup
 
@@ -207,8 +210,11 @@ deleteProductById(id: string): void { }
 
 ### 2.1 Core Principles
 - **Always use Spartan components** instead of custom HTML/Tailwind utilities
-- **Spartan = Radix UI primitives** + Angular directives—built-in accessibility
-- **Import from:** `@spartan-ng/helm/*` packages
+- **Spartan uses two-layer architecture:**
+  - `@spartan-ng/brain` (installed via npm): Handles ARIA, keyboard navigation, focus management
+  - `@spartan-ng/helm` (copied to project): Styled Tailwind classes you can customize
+- **Our project:** Local components in `libs/ui/` wrap brain primitives with helm styling
+- **Import from:** `@frost-logix/ui` (local) or `@spartan-ng/helm/*` (direct from npm)
 - **Documentation:** https://www.spartan.ng/components
 - **Do NOT mix:** Spartan directives + inline Tailwind on same element
 

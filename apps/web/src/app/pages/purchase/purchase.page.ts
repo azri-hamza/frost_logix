@@ -101,12 +101,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
                 placeholder="السعر"
                 class="w-24 rounded border border-border bg-background px-3 py-2"
               />
-              <button
-                (click)="addItem()"
-                class="rounded bg-secondary px-3 py-2"
-              >
-                إضافة
-              </button>
+              <button (click)="addItem()" class="rounded bg-secondary px-3 py-2">إضافة</button>
             </div>
             <table class="w-full">
               <thead class="border-b border-border bg-muted">
@@ -120,7 +115,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               <tbody>
                 @for (item of invoice.items; track item.product_id) {
                   <tr class="border-b border-border">
-                    <td class="px-2 py-1">{{ item.product_id }}</td>
+                    <td class="px-2 py-1">{{ getProductName(item.product_id) }}</td>
                     <td class="px-2 py-1">{{ item.quantity }}</td>
                     <td class="px-2 py-1">{{ item.unit_price }}</td>
                     <td class="px-2 py-1">{{ item.quantity * item.unit_price }}</td>
@@ -159,7 +154,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               @for (inv of invoices(); track inv.id) {
                 <tr class="border-b border-border">
                   <td class="px-4 py-2">{{ inv.invoice_number }}</td>
-                  <td class="px-4 py-2">{{ inv.date | date:'shortDate' }}</td>
+                  <td class="px-4 py-2">{{ inv.date | date: 'shortDate' }}</td>
                   <td class="px-4 py-2">{{ inv.supplier_name }}</td>
                   <td class="px-4 py-2">{{ inv.net_total }}</td>
                   <td class="px-4 py-2">
@@ -182,7 +177,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
           <h2 class="mb-4 text-lg font-semibold">أمر استلام جديد</h2>
           <div class="grid gap-4 md:grid-cols-3">
             <div>
-              <label class="mb-1 block text-sm font-medium">رقم الأم��</label>
+              <label class="mb-1 block text-sm font-medium">رقم الأمر</label>
               <input
                 [(ngModel)]="grn.grn_number"
                 class="w-full rounded border border-border bg-background px-3 py-2"
@@ -243,12 +238,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
                 placeholder="السعر"
                 class="w-24 rounded border border-border bg-background px-3 py-2"
               />
-              <button
-                (click)="addGRNItem()"
-                class="rounded bg-secondary px-3 py-2"
-              >
-                إضافة
-              </button>
+              <button (click)="addGRNItem()" class="rounded bg-secondary px-3 py-2">إضافة</button>
             </div>
             <table class="w-full">
               <thead class="border-b border-border bg-muted">
@@ -262,7 +252,7 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               <tbody>
                 @for (item of grn.items; track item.product_id) {
                   <tr class="border-b border-border">
-                    <td class="px-2 py-1">{{ item.product_id }}</td>
+                    <td class="px-2 py-1">{{ getProductName(item.product_id) }}</td>
                     <td class="px-2 py-1">{{ item.quantity }}</td>
                     <td class="px-2 py-1">{{ item.unit_price }}</td>
                     <td class="px-2 py-1">{{ item.quantity * item.unit_price }}</td>
@@ -294,13 +284,10 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               @for (g of grns(); track g.id) {
                 <tr class="border-b border-border">
                   <td class="px-4 py-2">{{ g.grn_number }}</td>
-                  <td class="px-4 py-2">{{ g.date | date:'shortDate' }}</td>
+                  <td class="px-4 py-2">{{ g.date | date: 'shortDate' }}</td>
                   <td class="px-4 py-2">{{ g.supplier_name }}</td>
                   <td class="px-4 py-2">
-                    <button
-                      (click)="exportGrnPdf(g)"
-                      class="text-xs text-primary hover:underline"
-                    >
+                    <button (click)="exportGrnPdf(g)" class="text-xs text-primary hover:underline">
                       PDF
                     </button>
                   </td>
@@ -325,7 +312,7 @@ export class PurchasePage {
   grns = signal<any[]>([]);
   view = signal<'invoices' | 'grn'>('invoices');
 
-  private getProductName(id: string): string {
+  getProductName(id: string): string {
     const product = this.products().find((p) => p.id === id);
     return product ? product.name : id;
   }
@@ -349,7 +336,7 @@ export class PurchasePage {
     items: [],
   };
 
-  newItem: any = { product_id: '', quantity: 0, unit_price: 0 };
+  newItem: any = { product_id: '', product_name: '', quantity: 0, unit_price: 0 };
   newGRNItem: any = { product_id: '', quantity: 0, unit_price: 0 };
 
   calculateSubtotal = () => {
@@ -365,13 +352,21 @@ export class PurchasePage {
 
   addItem(): void {
     if (!this.newItem.product_id || !this.newItem.quantity) return;
-    this.invoice.items = [...this.invoice.items, { ...this.newItem }];
+    const product = this.products().find((p) => p.id === this.newItem.product_id);
+    this.invoice.items = [
+      ...this.invoice.items,
+      { ...this.newItem, product_name: product?.name || '' },
+    ];
     this.newItem = { product_id: '', quantity: 0, unit_price: 0 };
   }
 
   addGRNItem(): void {
     if (!this.newGRNItem.product_id || !this.newGRNItem.quantity) return;
-    this.grn.items = [...this.grn.items, { ...this.newGRNItem }];
+    const product = this.products().find((p) => p.id === this.newGRNItem.product_id);
+    this.grn.items = [
+      ...this.grn.items,
+      { ...this.newGRNItem, product_name: product?.name || '' },
+    ];
     this.newGRNItem = { product_id: '', quantity: 0, unit_price: 0 };
   }
 

@@ -65,6 +65,7 @@ export class SalesService {
   async createDeliveryNote(data: CreateDeliveryNoteDto): Promise<DeliveryNoteDto> {
     const items = data.items.map((item) => ({
       product_id: item.product_id,
+      product_name: item.product_name,
       quantity: item.quantity,
       unit_price: item.unit_price,
       total: item.quantity * item.unit_price,
@@ -118,6 +119,7 @@ export class SalesService {
   async createInvoice(data: CreateSalesInvoiceDto): Promise<SalesInvoiceDto> {
     const items = data.items.map((item) => ({
       product_id: item.product_id,
+      product_name: item.product_name,
       quantity: item.quantity,
       unit_price: item.unit_price,
       total: item.quantity * item.unit_price,
@@ -174,7 +176,7 @@ export class SalesService {
       items: dn.items.map((item: any) => ({
         id: item.id,
         product_id: item.product_id,
-        product_name: item.product.name,
+        product_name: item.product_name,
         quantity: Number(item.quantity),
         unit_price: Number(item.unit_price),
         total: Number(item.total),
@@ -201,7 +203,7 @@ export class SalesService {
       items: invoice.items.map((item: any) => ({
         id: item.id,
         product_id: item.product_id,
-        product_name: item.product.name,
+        product_name: item.product_name,
         quantity: Number(item.quantity),
         unit_price: Number(item.unit_price),
         total: Number(item.total),

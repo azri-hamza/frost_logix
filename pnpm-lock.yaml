@@ -66,8 +66,11 @@ importers:
         specifier: 6.19.2
         version: 6.19.2(prisma@6.19.2(typescript@5.9.3))(typescript@5.9.3)
       '@spartan-ng/brain':
-        specifier: 0.0.1-alpha.678
-        version: 0.0.1-alpha.678(92e5bef76e57ed7946b6081e5d1ff204)
+        specifier: 0.0.1-alpha.688
+        version: 0.0.1-alpha.688(92e5bef76e57ed7946b6081e5d1ff204)
+      '@spartan-ng/cli':
+        specifier: 0.0.1-alpha.688
+        version: 0.0.1-alpha.688(7a0e1b7c88753d7a6268f4b151c4fc5a)
       '@types/express':
         specifier: ^5.0.6
         version: 5.0.6
@@ -189,9 +192,6 @@ importers:
       '@schematics/angular':
         specifier: ^21.2.9
         version: 21.2.9
-      '@spartan-ng/cli':
-        specifier: 0.0.1-alpha.678
-        version: 0.0.1-alpha.678(7a0e1b7c88753d7a6268f4b151c4fc5a)
       '@swc-node/register':
         specifier: 1.11.1
         version: 1.11.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.32(@swc/helpers@0.5.18))(@swc/types@0.1.26)(typescript@5.9.3)
@@ -3071,11 +3071,6 @@ packages:
     peerDependencies:
       typescript: ^3 || ^4 || ^5
 
-  '@phenomnomnominal/tsquery@6.2.0':
-    resolution: {integrity: sha512-Vo9nkhfZxDB/sBiqIY3pjDC4mOSyure+AFlEW5hcy/tRE82MqCXjRN4InnVNMldinRt0dLYqg4HAU2XPq5e1LA==}
-    peerDependencies:
-      typescript: '>3.0.0'
-
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -3478,8 +3473,8 @@ packages:
   '@sinonjs/fake-timers@15.3.2':
     resolution: {integrity: sha512-mrn35Jl2pCpns+mE3HaZa1yPN5EYCRgiMI+135COjr2hr8Cls9DXqIZ57vZe2cz7y2XVSq92tcs6kGQcT1J8Rw==}
 
-  '@spartan-ng/brain@0.0.1-alpha.678':
-    resolution: {integrity: sha512-FqVq1gtvSy+U2vDhFtBEYOCNhDYY8msi6z3yyiIx9YY06i1Q2oqF3lh7d1ahyzlEoOLnxiJpEhn52fFy/9ujVg==}
+  '@spartan-ng/brain@0.0.1-alpha.688':
+    resolution: {integrity: sha512-Oc39ER2KeVgi5qCsf9HwgzRkWfLdzxoBnZXNhxi1n2z0WXGCgL+E8d1fIRoIYrh6/41Jyqz/hdnnXOZbW5VJTQ==}
     peerDependencies:
       '@angular/cdk': '>=20.0.0 <22.0.0'
       '@angular/common': '>=20.0.0 <22.0.0'
@@ -3493,8 +3488,8 @@ packages:
       luxon:
         optional: true
 
-  '@spartan-ng/cli@0.0.1-alpha.678':
-    resolution: {integrity: sha512-YBLh5ZnVkvPAnc3w2DS4kwGNAhatnDsv6ndSbZeMhCVrWgKn/zLFiHpVLO+8BTxxg+H80PXfBKN+pypGOY+7qQ==}
+  '@spartan-ng/cli@0.0.1-alpha.688':
+    resolution: {integrity: sha512-YB62/6fVp0hsuAy8VGqzZtkdG2iEm1wgq+Ivnv8FWA/QQ6+/HJSLsNnlhcnbIofqBGy6F262oI6cx6jlaYJJVA==}
     peerDependencies:
       tslib: ^2.3.0
 
@@ -13208,12 +13203,6 @@ snapshots:
       esquery: 1.7.0
       typescript: 5.9.3
 
-  '@phenomnomnominal/tsquery@6.2.0(typescript@5.9.3)':
-    dependencies:
-      '@types/esquery': 1.5.4
-      esquery: 1.7.0
-      typescript: 5.9.3
-
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -13566,7 +13555,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@spartan-ng/brain@0.0.1-alpha.678(92e5bef76e57ed7946b6081e5d1ff204)':
+  '@spartan-ng/brain@0.0.1-alpha.688(92e5bef76e57ed7946b6081e5d1ff204)':
     dependencies:
       '@angular/cdk': 21.2.8(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(@angular/platform-browser@21.2.10(@angular/animations@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)))(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)))(rxjs@7.8.2)
       '@angular/common': 21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -13579,14 +13568,14 @@ snapshots:
     optionalDependencies:
       luxon: 3.7.2
 
-  '@spartan-ng/cli@0.0.1-alpha.678(7a0e1b7c88753d7a6268f4b151c4fc5a)':
+  '@spartan-ng/cli@0.0.1-alpha.688(7a0e1b7c88753d7a6268f4b151c4fc5a)':
     dependencies:
       '@angular/core': 21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)
       '@nx/angular': 22.7.1(a1b8080a2fb9838dc973b17957419806)
       '@nx/devkit': 22.7.1(nx@22.7.1(@swc-node/register@1.11.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.32(@swc/helpers@0.5.18))(@swc/types@0.1.26)(typescript@5.9.3))(@swc/core@1.15.32(@swc/helpers@0.5.18)))
       '@nx/js': 22.7.1(@babel/traverse@7.29.0)(@swc-node/register@1.11.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.32(@swc/helpers@0.5.18))(@swc/types@0.1.26)(typescript@5.9.3))(@swc/core@1.15.32(@swc/helpers@0.5.18))(nx@22.7.1(@swc-node/register@1.11.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.32(@swc/helpers@0.5.18))(@swc/types@0.1.26)(typescript@5.9.3))(@swc/core@1.15.32(@swc/helpers@0.5.18)))
       '@nx/workspace': 22.7.1(@swc-node/register@1.11.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.32(@swc/helpers@0.5.18))(@swc/types@0.1.26)(typescript@5.9.3))(@swc/core@1.15.32(@swc/helpers@0.5.18))
-      '@phenomnomnominal/tsquery': 6.2.0(typescript@5.9.3)
+      '@phenomnomnominal/tsquery': 6.1.4(typescript@5.9.3)
       '@schematics/angular': 20.3.9
       enquirer: 2.3.6
       jsonc-eslint-parser: 2.1.0

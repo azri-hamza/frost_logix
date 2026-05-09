@@ -52,9 +52,7 @@ import { HlmAlertDialogImports } from '@frost-logix/ui/alert-dialog';
               </select>
             </div>
           </div>
-          <button hlmBtn (click)="createProduct()">
-            حفظ
-          </button>
+          <button hlmBtn (click)="createProduct()">حفظ</button>
         </div>
       }
 
@@ -102,12 +100,8 @@ import { HlmAlertDialogImports } from '@frost-logix/ui/alert-dialog';
             </label>
           </div>
           <div class="mt-4 flex gap-2">
-            <button hlmBtn (click)="updateProduct()">
-              حفظ التغييرات
-            </button>
-            <button hlmBtn variant="outline" (click)="cancelEdit()">
-              إلغاء
-            </button>
+            <button hlmBtn (click)="updateProduct()">حفظ التغييرات</button>
+            <button hlmBtn variant="outline" (click)="cancelEdit()">إلغاء</button>
           </div>
         </div>
       }
@@ -137,52 +131,40 @@ import { HlmAlertDialogImports } from '@frost-logix/ui/alert-dialog';
                   }
                 </td>
                 <td class="px-4 py-2">
-                  <button
-                    (click)="startEdit(product)"
-                    hlmBtn
-                    variant="outline"
-                    size="sm"
-                  >
+                  <button (click)="startEdit(product)" hlmBtn variant="outline" size="sm">
                     تعديل
                   </button>
 
-                   <hlm-alert-dialog>
-                     <button
-                       hlmAlertDialogTrigger
-                       hlmBtn
-                       variant="destructive"
-                       size="sm"
-                       class="ml-2"
-                     >
-                       حذف
-                     </button>
-                     <hlm-alert-dialog-content *hlmAlertDialogPortal="let ctx" (keydown.escape)="ctx.close()">
-                       <hlm-alert-dialog-header>
-                         <h2 hlmAlertDialogTitle>حذف المنتج</h2>
-                         <p hlmAlertDialogDescription>
-                           هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.
-                         </p>
-                       </hlm-alert-dialog-header>
-                       <hlm-alert-dialog-footer>
-                         <button
-                           hlmAlertDialogCancel
-                           hlmBtn
-                           variant="outline"
-                           (click)="ctx.close()"
-                         >
-                           إلغاء
-                         </button>
-                         <button
-                           hlmAlertDialogAction
-                           hlmBtn
-                           variant="destructive"
-                           (click)="confirmDelete(product.id); ctx.close()"
-                         >
-                           حذف
-                         </button>
-                       </hlm-alert-dialog-footer>
-                     </hlm-alert-dialog-content>
-                   </hlm-alert-dialog>
+                  <hlm-alert-dialog>
+                    <button
+                      hlmAlertDialogTrigger
+                      hlmBtn
+                      variant="destructive"
+                      size="sm"
+                      class="ml-2"
+                    >
+                      حذف
+                    </button>
+                    <hlm-alert-dialog-content *hlmAlertDialogPortal>
+                      <hlm-alert-dialog-header>
+                        <h2 hlmAlertDialogTitle>حذف المنتج</h2>
+                        <p hlmAlertDialogDescription>
+                          هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.
+                        </p>
+                      </hlm-alert-dialog-header>
+                      <hlm-alert-dialog-footer>
+                        <button hlmAlertDialogCancel hlmBtn variant="outline">إلغاء</button>
+                        <button
+                          hlmAlertDialogAction
+                          hlmBtn
+                          variant="destructive"
+                          (click)="confirmDelete(product.id)"
+                        >
+                          حذف
+                        </button>
+                      </hlm-alert-dialog-footer>
+                    </hlm-alert-dialog-content>
+                  </hlm-alert-dialog>
                 </td>
               </tr>
             }
@@ -273,9 +255,7 @@ export class ProductsPage {
 
     this.productsService.updateProduct(product.id, data).subscribe({
       next: (updated) => {
-        this.products.update((current) =>
-          current.map((p) => (p.id === updated.id ? updated : p))
-        );
+        this.products.update((current) => current.map((p) => (p.id === updated.id ? updated : p)));
         this.cancelEdit();
       },
       error: (error) => console.error('Failed to update product:', error),
@@ -289,9 +269,7 @@ export class ProductsPage {
   confirmDelete(productId: string): void {
     this.productsService.deleteProduct(productId).subscribe({
       next: () => {
-        this.products.update((current) =>
-          current.filter((p) => p.id !== productId)
-        );
+        this.products.update((current) => current.filter((p) => p.id !== productId));
         if (this.editingProduct()?.id === productId) {
           this.cancelEdit();
         }

@@ -32,11 +32,11 @@
       "shared-types": [
         "libs/shared-types/src/index.ts"
       ],
-      "@frost-logix/ui/button": [
-        "libs/ui/button/src/index.ts"
-      ],
       "@frost-logix/ui/utils": [
-        "libs/ui/utils/src/index.ts"
+        "./libs/ui/utils/src/index.ts"
+      ],
+      "@frost-logix/ui/button": [
+        "./libs/ui/button/src/index.ts"
       ],
       "@frost-logix/ui/alert-dialog": [
         "./libs/ui/alert-dialog/src/index.ts"

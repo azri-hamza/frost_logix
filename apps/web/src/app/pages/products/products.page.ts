@@ -153,10 +153,9 @@ import { HlmAlertDialogImports } from '@frost-logix/ui/alert-dialog';
                         </p>
                       </hlm-alert-dialog-header>
                       <hlm-alert-dialog-footer>
-                        <button hlmAlertDialogCancel hlmBtn variant="outline">إلغاء</button>
+                        <button hlmAlertDialogCancel variant="outline">إلغاء</button>
                         <button
                           hlmAlertDialogAction
-                          hlmBtn
                           variant="destructive"
                           (click)="confirmDelete(product.id)"
                         >

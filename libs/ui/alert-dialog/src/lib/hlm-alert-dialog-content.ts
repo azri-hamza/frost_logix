@@ -1,11 +1,9 @@
-import { Directive, signal, computed, effect, untracked, inject } from '@angular/core';
-import { injectExposesStateProvider, injectCustomClassSettable } from '@spartan-ng/brain/core';
-import { BrnAlertDialogContent } from '@spartan-ng/brain/alert-dialog';
+import { Directive, signal } from '@angular/core';
+import { injectExposesStateProvider } from '@spartan-ng/brain/core';
 import { classes } from '@frost-logix/ui/utils';
 
 @Directive({
 	selector: '[hlmAlertDialogContent],hlm-alert-dialog-content',
-	hostDirectives: [BrnAlertDialogContent],
 	host: {
 		'data-slot': 'alert-dialog-content',
 		'[attr.data-state]': 'state()',

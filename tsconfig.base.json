@@ -39,7 +39,7 @@
         "libs/ui/utils/src/index.ts"
       ],
       "@frost-logix/ui/alert-dialog": [
-        "libs/ui/alert-dialog/src/index.ts"
+        "./libs/ui/alert-dialog/src/index.ts"
       ]
     }
   }

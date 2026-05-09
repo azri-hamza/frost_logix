@@ -14,8 +14,6 @@ import { HlmAlertDialogOverlay } from './hlm-alert-dialog-overlay';
 		},
 		provideBrnDialogDefaultOptions({
 			...BRN_ALERT_DIALOG_DEFAULT_OPTIONS,
-			closeOnBackdropClick: true,
-			disableClose: false,
 		}),
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,

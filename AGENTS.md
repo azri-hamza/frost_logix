@@ -84,6 +84,7 @@ pnpm nx g @spartan-ng/cli:ui button --project=web  # add spartan component
 - **State management:** Signals exclusively (`signal`, `computed`, `effect`)
 - **Lifecycle:** Use `afterNextRender()` for initialization—never `ngOnInit`
 - **Change detection:** Zoneless with `provideZonelessChangeDetection()`
+- **Templates & Styles:** Always use `templateUrl` and `styleUrl` (external files) — never inline `template` or `styles`
 
 ```typescript
 import { Component, signal, inject, afterNextRender } from '@angular/core';
@@ -93,7 +94,8 @@ import { MyService } from './my.service';
   selector: 'app-example',
   standalone: true,
   imports: [CommonModule],
-  template: `<p>{{ message() }}</p>`,
+  templateUrl: './example.component.html',
+  styleUrl: './example.component.css',
 })
 export class ExampleComponent {
   private readonly service = inject(MyService);
@@ -783,6 +785,7 @@ libs/
 - Always handle errors in Observable subscriptions
 - Use Spartan UI components exclusively—never build custom modals
 - Use dialog context (`let ctx`) for proper dialog state management
+- **Always use `templateUrl` and `styleUrl`** (external files) — never inline `template` or `styles`
 
 ### Spartan UI
 
@@ -829,6 +832,7 @@ libs/
 | Create button       | `<button hlmBtn variant="default">Label</button>`     | Use `variant` & `size`                |
 | Delete confirmation | `<hlm-alert-dialog>` with destructive button          | Use `*hlmAlertDialogPortal="let ctx"` |
 | Complex dialog      | `<hlm-dialog>` with form content                      | Same context pattern                  |
+| Template & style    | `templateUrl: './file.html'`, `styleUrl: './file.css'` | Never use inline `template`/`styles`  |
 | Load data on init   | `afterNextRender(() => this.load())`                  | Never use `ngOnInit`                  |
 | Update signal       | `this.state.update((current) => ...)`                 | Immutable updates                     |
 | Render list         | `@for (item of items(); track item.id)`               | Always use `track`                    |

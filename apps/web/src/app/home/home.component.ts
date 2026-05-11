@@ -1,11 +1,4 @@
 import { Component } from '@angular/core';
-import {
-  HlmAlertDialog,
-  HlmAlertDialogContent,
-  HlmAlertDialogHeader,
-  HlmAlertDialogFooter,
-} from '@frost-logix/ui/alert-dialog';
-import { HlmButtonImports } from '@frost-logix/ui/button';
 
 @Component({
   selector: 'app-home',
@@ -18,25 +11,7 @@ import { HlmButtonImports } from '@frost-logix/ui/button';
         </p>
       </div>
     </div>
-    <hlm-alert-dialog>
-      <button hlmAlertDialogTrigger hlmBtn>Test Dialog</button>
-      <hlm-alert-dialog-content *hlmAlertDialogPortal>
-        <hlm-alert-dialog-header>
-          <h2 hlmAlertDialogTitle>Test</h2>
-        </hlm-alert-dialog-header>
-        <hlm-alert-dialog-footer>
-          <button hlmAlertDialogCancel hlmBtn variant="outline">Cancel</button>
-          <button hlmAlertDialogAction hlmBtn variant="destructive">Confirm</button>
-        </hlm-alert-dialog-footer>
-      </hlm-alert-dialog-content>
-    </hlm-alert-dialog>
   `,
-  imports: [
-    HlmButtonImports,
-    HlmAlertDialog,
-    HlmAlertDialogContent,
-    HlmAlertDialogHeader,
-    HlmAlertDialogFooter,
-  ],
+  imports: [],
 })
 export class HomeComponent {}

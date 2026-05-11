@@ -40,23 +40,26 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
           <h2 class="mb-4 text-lg font-semibold">فاتورة شراء جديدة</h2>
           <div class="grid gap-4 md:grid-cols-3">
             <div>
-              <label class="mb-1 block text-sm font-medium">رقم الفاتورة</label>
+              <label class="mb-1 block text-sm font-medium" for="invoice-number">رقم الفاتورة</label>
               <input
+                id="invoice-number"
                 [(ngModel)]="invoice.invoice_number"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               />
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">التاريخ</label>
+              <label class="mb-1 block text-sm font-medium" for="invoice-date">التاريخ</label>
               <input
+                id="invoice-date"
                 [(ngModel)]="invoice.date"
                 type="date"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               />
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">المورد</label>
+              <label class="mb-1 block text-sm font-medium" for="supplier">المورد</label>
               <select
+                id="supplier"
                 [(ngModel)]="invoice.supplier_id"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               >
@@ -66,8 +69,9 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               </select>
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">نوع المخزون</label>
+              <label class="mb-1 block text-sm font-medium" for="stock-type">نوع المخزون</label>
               <select
+                id="stock-type"
                 [(ngModel)]="invoice.stock_type"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               >
@@ -177,23 +181,26 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
           <h2 class="mb-4 text-lg font-semibold">أمر استلام جديد</h2>
           <div class="grid gap-4 md:grid-cols-3">
             <div>
-              <label class="mb-1 block text-sm font-medium">رقم الأمر</label>
+              <label class="mb-1 block text-sm font-medium" for="grn_number">رقم الأمر</label>
               <input
+                id="grn_number"
                 [(ngModel)]="grn.grn_number"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               />
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">التاريخ</label>
+              <label class="mb-1 block text-sm font-medium" for="grn-date">التاريخ</label>
               <input
+                id="grn-date"
                 [(ngModel)]="grn.date"
                 type="date"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               />
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">المورد</label>
+              <label class="mb-1 block text-sm font-medium" for="supplier">المورد</label>
               <select
+                id="supplier"
                 [(ngModel)]="grn.supplier_id"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               >
@@ -203,8 +210,9 @@ import { SupplierDto, ProductDto } from '@frost-logix/shared-types';
               </select>
             </div>
             <div>
-              <label class="mb-1 block text-sm font-medium">نوع المخزون</label>
+              <label class="mb-1 block text-sm font-medium" for="stock-type">نوع المخزون</label>
               <select
+                id="stock-type"
                 [(ngModel)]="grn.stock_type"
                 class="w-full rounded border border-border bg-background px-3 py-2"
               >

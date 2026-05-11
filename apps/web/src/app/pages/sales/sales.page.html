@@ -1,0 +1,318 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">المبيعات</h1>
+    <div class="flex gap-2">
+      <button
+        (click)="view.set('delivery-notes')"
+        class="rounded px-3 py-1"
+        [class.bg-primary]="view() === 'delivery-notes'"
+        [class.text-primary-foreground]="view() === 'delivery-notes'"
+      >
+        أوامر التسليم
+      </button>
+      <button
+        (click)="view.set('invoices')"
+        class="rounded px-3 py-1"
+        [class.bg-primary]="view() === 'invoices'"
+        [class.text-primary-foreground]="view() === 'invoices'"
+      >
+        فواتير البيع
+      </button>
+    </div>
+  </div>
+
+  @if (view() === 'delivery-notes') {
+    <div class="rounded border border-border bg-card p-4">
+      <h2 class="mb-4 text-lg font-semibold">أمر تسليم جديد</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div>
+          <label class="mb-1 block text-sm font-medium">رقم الأمر</label>
+          <input
+            [(ngModel)]="dn.dn_number"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">التاريخ</label>
+          <input
+            [(ngModel)]="dn.date"
+            type="date"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">الزبون</label>
+          <select
+            [(ngModel)]="dn.customer_id"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          >
+            @for (customer of customers(); track customer.id) {
+              <option [value]="customer.id">{{ customer.name }}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">اسم السائق</label>
+          <input
+            [(ngModel)]="dn.driver_name"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">رقم الشاحنة</label>
+          <input
+            [(ngModel)]="dn.vehicle_plate"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h3 class="mb-2 font-medium">المواد</h3>
+        <div class="mb-2 flex gap-2">
+          <select
+            [(ngModel)]="newDNItem.product_id"
+            class="flex-1 rounded border border-border bg-background px-3 py-2"
+          >
+            @for (product of products(); track product.id) {
+              <option [value]="product.id">{{ product.name }}</option>
+            }
+          </select>
+          <input
+            [(ngModel)]="newDNItem.quantity"
+            type="number"
+            placeholder="الكمية"
+            class="w-24 rounded border border-border bg-background px-3 py-2"
+          />
+          <input
+            [(ngModel)]="newDNItem.unit_price"
+            type="number"
+            step="0.001"
+            placeholder="السعر"
+            class="w-24 rounded border border-border bg-background px-3 py-2"
+          />
+          <button
+            (click)="addDNItem()"
+            class="rounded bg-secondary px-3 py-2"
+          >
+            إضافة
+          </button>
+        </div>
+        <table class="w-full">
+          <thead class="border-b border-border bg-muted">
+            <tr>
+              <th class="px-2 py-1 text-right">المنتج</th>
+              <th class="px-2 py-1 text-right">الكمية</th>
+              <th class="px-2 py-1 text-right">السعر</th>
+              <th class="px-2 py-1 text-right">المجموع</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of dn.items; track item.product_id) {
+              <tr class="border-b border-border">
+                <td class="px-2 py-1">{{ item.product_id }}</td>
+                <td class="px-2 py-1">{{ item.quantity }}</td>
+                <td class="px-2 py-1">{{ item.unit_price }}</td>
+                <td class="px-2 py-1">{{ item.quantity * item.unit_price }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <button
+        (click)="createDN()"
+        class="mt-4 rounded bg-primary px-4 py-2 text-primary-foreground"
+      >
+        حفظ أمر التسليم
+      </button>
+    </div>
+
+    <div class="rounded border border-border">
+      <table class="w-full">
+        <thead class="border-b border-border bg-muted">
+          <tr>
+            <th class="px-4 py-2 text-right">رقم الأمر</th>
+            <th class="px-4 py-2 text-right">التاريخ</th>
+            <th class="px-4 py-2 text-right">الزبون</th>
+            <th class="px-4 py-2 text-right">السائق</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (d of deliveryNotes(); track d.id) {
+            <tr class="border-b border-border">
+              <td class="px-4 py-2">{{ d.dn_number }}</td>
+              <td class="px-4 py-2">{{ d.date | date:'shortDate' }}</td>
+              <td class="px-4 py-2">{{ d.customer_name }}</td>
+              <td class="px-4 py-2">{{ d.driver_name }}</td>
+              <td class="px-4 py-2">
+                <button
+                  (click)="exportDnPdf(d)"
+                  class="text-xs text-primary hover:underline"
+                >
+                  PDF
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (view() === 'invoices') {
+    <div class="rounded border border-border bg-card p-4">
+      <h2 class="mb-4 text-lg font-semibold">فاتورة بيع جديدة</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div>
+          <label class="mb-1 block text-sm font-medium">رقم الفاتورة</label>
+          <input
+            [(ngModel)]="invoice.invoice_number"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">التاريخ</label>
+          <input
+            [(ngModel)]="invoice.date"
+            type="date"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">الزبون</label>
+          <select
+            [(ngModel)]="invoice.customer_id"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          >
+            @for (customer of customers(); track customer.id) {
+              <option [value]="customer.id">{{ customer.name }}</option>
+            }
+          </select>
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">نوع المخزون</label>
+          <select
+            [(ngModel)]="invoice.stock_type"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          >
+            <option value="SCHOOLS">المعاهد</option>
+            <option value="OTHERS">آخرون</option>
+          </select>
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">اسم السائق</label>
+          <input
+            [(ngModel)]="invoice.driver_name"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium">رقم الشاحنة</label>
+          <input
+            [(ngModel)]="invoice.vehicle_plate"
+            class="w-full rounded border border-border bg-background px-3 py-2"
+          />
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h3 class="mb-2 font-medium">المواد</h3>
+        <div class="mb-2 flex gap-2">
+          <select
+            [(ngModel)]="newInvoiceItem.product_id"
+            class="flex-1 rounded border border-border bg-background px-3 py-2"
+          >
+            @for (product of products(); track product.id) {
+              <option [value]="product.id">{{ product.name }}</option>
+            }
+          </select>
+          <input
+            [(ngModel)]="newInvoiceItem.quantity"
+            type="number"
+            placeholder="الكمية"
+            class="w-24 rounded border border-border bg-background px-3 py-2"
+          />
+          <input
+            [(ngModel)]="newInvoiceItem.unit_price"
+            type="number"
+            step="0.001"
+            placeholder="السعر"
+            class="w-24 rounded border border-border bg-background px-3 py-2"
+          />
+          <button
+            (click)="addInvoiceItem()"
+            class="rounded bg-secondary px-3 py-2"
+          >
+            إضافة
+          </button>
+        </div>
+        <table class="w-full">
+          <thead class="border-b border-border bg-muted">
+            <tr>
+              <th class="px-2 py-1 text-right">المنتج</th>
+              <th class="px-2 py-1 text-right">الكمية</th>
+              <th class="px-2 py-1 text-right">السعر</th>
+              <th class="px-2 py-1 text-right">المجموع</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of invoice.items; track item.product_id) {
+              <tr class="border-b border-border">
+                <td class="px-2 py-1">{{ item.product_id }}</td>
+                <td class="px-2 py-1">{{ item.quantity }}</td>
+                <td class="px-2 py-1">{{ item.unit_price }}</td>
+                <td class="px-2 py-1">{{ item.quantity * item.unit_price }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 flex justify-end gap-4">
+        <div>المجموع: {{ calculateSubtotal() }}</div>
+        <div>الضريبة: {{ invoice.tax }}</div>
+        <div>الصافي: {{ calculateNetTotal() }}</div>
+      </div>
+
+      <button
+        (click)="createInvoice()"
+        class="mt-4 rounded bg-primary px-4 py-2 text-primary-foreground"
+      >
+        حفظ الفاتورة
+      </button>
+    </div>
+
+    <div class="rounded border border-border">
+      <table class="w-full">
+        <thead class="border-b border-border bg-muted">
+          <tr>
+            <th class="px-4 py-2 text-right">رقم الفاتورة</th>
+            <th class="px-4 py-2 text-right">التاريخ</th>
+            <th class="px-4 py-2 text-right">الزبون</th>
+            <th class="px-4 py-2 text-right">الصافي</th>
+            <th class="px-4 py-2 text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (inv of invoices(); track inv.id) {
+            <tr class="border-b border-border">
+              <td class="px-4 py-2">{{ inv.invoice_number }}</td>
+              <td class="px-4 py-2">{{ inv.date | date:'shortDate' }}</td>
+              <td class="px-4 py-2">{{ inv.customer_name }}</td>
+              <td class="px-4 py-2">{{ inv.net_total }}</td>
+              <td class="px-4 py-2">
+                <button
+                  (click)="exportInvoicePdf(inv)"
+                  class="text-xs text-primary hover:underline"
+                >
+                  PDF
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
